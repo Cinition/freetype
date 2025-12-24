@@ -2,7 +2,7 @@
     .name = .freetype,
     .version = "2.13.3",
     .fingerprint = 0xac2059b675967f0b,
-    .minimum_zig_version = "0.14.0",
+    .minimum_zig_version = "0.15.1",
     .paths = .{
         "LICENSE",
         "Library.zig",
@@ -23,12 +23,12 @@
             .hash = "N-V-__8AAKfbpwAXnUJ6TJEaqZGWgp6F_8OhiLErejRxQ7Y5",
         },
         .libpng = .{
-            .url = "git+https://github.com/allyourcodebase/libpng#d512607515687aa60b975d6a191aef9a692dac87",
-            .hash = "libpng-1.6.50-oiaFGt4qAAB_vzrtvz9hA7_UiBW4arSaMVGc7ekKMCZ2",
+            .url = "git+https://github.com/allyourcodebase/libpng#4783adcb3b8ed0e3d5032a3434059be594755f57",
+            .hash = "libpng-1.6.53-oiaFGtwqAAB2XTxMgi4dG96BUO-0_BtUFtxKraIwq6-w",
         },
         .zlib = .{
-            .url = "git+https://github.com/allyourcodebase/zlib#8a8161babd4b79ea47d5a5976337a96ac4a5666b",
-            .hash = "zlib-1.3.1-ZZQ7lbYMAAAuaZnFj2675ah508w1Oc-EuY1V1cWJka2C",
+            .url = "git+https://github.com/allyourcodebase/zlib#3599c16d41dbe749ae51b0ff7ab864c61adc779a",
+            .hash = "zlib-1.3.1-ZZQ7lc8NAABUbHzDe_cSWboCqMbrLkVwvFkKnojgeiT2",
         },
     },
 }

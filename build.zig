@@ -17,21 +17,22 @@ pub fn build(b: *std.Build) !void {
             .link_libc = true,
         }),
     });
-    lib.addIncludePath(upstream.path("include"));
+    lib.root_module.addIncludePath(upstream.path("include"));
 
     module.addIncludePath(upstream.path("include"));
     module.addIncludePath(b.path(""));
 
     // Dependencies
     const zlib_dep = b.dependency("zlib", .{ .target = target, .optimize = optimize });
-    lib.linkLibrary(zlib_dep.artifact("z"));
+    lib.root_module.linkLibrary(zlib_dep.artifact("z"));
     if (libpng_enabled) {
         const libpng_dep = b.dependency("libpng", .{ .target = target, .optimize = optimize });
-        lib.linkLibrary(libpng_dep.artifact("png"));
+        lib.root_module.linkLibrary(libpng_dep.artifact("png"));
     }
 
-    var flags: std.ArrayListUnmanaged([]const u8) = .empty;
+    var flags: std.ArrayList([]const u8) = .empty;
     defer flags.deinit(b.allocator);
+
     try flags.appendSlice(b.allocator, &.{
         "-DFT2_BUILD_LIBRARY",
 
@@ -44,37 +45,37 @@ pub fn build(b: *std.Build) !void {
     });
     if (libpng_enabled) try flags.append(b.allocator, "-DFT_CONFIG_OPTION_USE_PNG=1");
 
-    lib.addCSourceFiles(.{
+    lib.root_module.addCSourceFiles(.{
         .root = upstream.path(""),
         .files = srcs,
         .flags = flags.items,
     });
 
     switch (target.result.os.tag) {
-        .linux => lib.addCSourceFile(.{
+        .linux => lib.root_module.addCSourceFile(.{
             .file = upstream.path("builds/unix/ftsystem.c"),
             .flags = flags.items,
         }),
-        .windows => lib.addCSourceFile(.{
+        .windows => lib.root_module.addCSourceFile(.{
             .file = upstream.path("builds/windows/ftsystem.c"),
             .flags = flags.items,
         }),
-        else => lib.addCSourceFile(.{
+        else => lib.root_module.addCSourceFile(.{
             .file = upstream.path("src/base/ftsystem.c"),
             .flags = flags.items,
         }),
     }
     switch (target.result.os.tag) {
         .windows => {
-            lib.addCSourceFile(.{
+            lib.root_module.addCSourceFile(.{
                 .file = upstream.path("builds/windows/ftdebug.c"),
                 .flags = flags.items,
             });
-            lib.addWin32ResourceFile(.{
+            lib.root_module.addWin32ResourceFile(.{
                 .file = upstream.path("src/base/ftver.rc"),
             });
         },
-        else => lib.addCSourceFile(.{
+        else => lib.root_module.addCSourceFile(.{
             .file = upstream.path("src/base/ftdebug.c"),
             .flags = flags.items,
         }),
@@ -98,7 +99,7 @@ pub fn build(b: *std.Build) !void {
                 .optimize = optimize,
             }),
         });
-        test_exe.linkLibrary(lib);
+        test_exe.root_module.linkLibrary(lib);
         const tests_run = b.addRunArtifact(test_exe);
         const test_step = b.step("test", "Run tests");
         test_step.dependOn(&tests_run.step);
