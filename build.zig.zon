@@ -1,6 +1,6 @@
 .{
     .name = .freetype,
-    .version = "2.14.1",
+    .version = "2.14.3",
     .fingerprint = 0xac2059b675967f0b,
     .minimum_zig_version = "0.15.2",
     .paths = .{
@@ -19,16 +19,16 @@
     },
     .dependencies = .{
         .freetype = .{
-            .url = "https://download.savannah.gnu.org/releases/freetype/freetype-2.14.1.tar.xz",
-            .hash = "N-V-__8AAIT5KwGz955VFk9c5rWaksEC9xVOvGDyR5JBAXnB",
+            .url = "https://download.savannah.gnu.org/releases/freetype/freetype-2.14.3.tar.xz",
+            .hash = "N-V-__8AAJo-LAHFNfa0p0oMQqmwlBEAZMOeo03azXgrKLTT",
         },
         .libpng = .{
-            .url = "git+https://github.com/allyourcodebase/libpng#4783adcb3b8ed0e3d5032a3434059be594755f57",
-            .hash = "libpng-1.6.53-oiaFGtwqAAB2XTxMgi4dG96BUO-0_BtUFtxKraIwq6-w",
+            .url = "git+https://github.com/allyourcodebase/libpng#e123eca2140de78f1017a46c24e330fb3024fc58",
+            .hash = "libpng-1.6.57-oiaFGuYqAAB3CK1mjIzXHn2Z3EVV9okuko-VH23OOSV_",
         },
         .zlib = .{
-            .url = "git+https://github.com/allyourcodebase/zlib#3599c16d41dbe749ae51b0ff7ab864c61adc779a",
-            .hash = "zlib-1.3.1-ZZQ7lc8NAABUbHzDe_cSWboCqMbrLkVwvFkKnojgeiT2",
+            .url = "git+https://github.com/allyourcodebase/zlib?ref=1.3.2#d3b5519d3b73616a6bfece0712f080029d2a9244",
+            .hash = "zlib-1.3.2-ZZQ7lc8NAAAHm9MDfplvwoesXvk4tVm6VCsiI8KnIbT0",
         },
     },
 }
