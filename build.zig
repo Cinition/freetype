@@ -3,7 +3,7 @@ const std = @import("std");
 pub fn build(b: *std.Build) !void {
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{});
-    const libpng_enabled = b.option(bool, "enable-libpng", "Build libpng") orelse false;
+    const libpng_enabled = b.option(bool, "enable_libpng", "Build libpng") orelse false;
 
     const module = b.addModule("freetype", .{ .root_source_file = b.path("main.zig") });
 
