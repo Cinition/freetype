@@ -72,6 +72,19 @@ pub const Face = struct {
         ));
     }
 
+    /// Call FT_Request_Size to request the nominal size (in pixels).
+    pub fn setPixelSizes(
+        self: Face,
+        pixel_width: u32,
+        pixel_height: u32,
+    ) Error!void {
+        return intToError(c.FT_Set_Pixel_Sizes(
+            self.handle,
+            pixel_width,
+            pixel_height,
+        ));
+    }
+
     /// Select a bitmap strike. To be more precise, this function sets the
     /// scaling factors of the active FT_Size object in a face so that bitmaps
     /// from this particular strike are taken by FT_Load_Glyph and friends.
@@ -91,6 +104,15 @@ pub const Face = struct {
         return intToError(c.FT_Load_Glyph(
             self.handle,
             glyph_index,
+            @bitCast(load_flags),
+        ));
+    }
+
+    /// Load a char into the glyph slot of a face object.
+    pub fn loadChar(self: Face, char_code: u32, load_flags: LoadFlags) Error!void {
+        return intToError(c.FT_Load_Char(
+            self.handle,
+            char_code,
             @bitCast(load_flags),
         ));
     }
