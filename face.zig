@@ -215,8 +215,8 @@ pub const Face = struct {
     ) void {
         c.FT_Set_Transform(
             self.handle,
-            @constCast(@ptrCast(matrix)),
-            @constCast(@ptrCast(delta)),
+            @ptrCast(@constCast(matrix)),
+            @ptrCast(@constCast(delta)),
         );
     }
 };
